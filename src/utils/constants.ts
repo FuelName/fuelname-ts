@@ -1,0 +1,3 @@
+export const RegistryContractId = '0x8e66c1787462dad4193ce687eab081adbcbced4b2cc4170f061285a4489855e7';
+export const RegistrarContractId = '0xbb04e3c7222d3bbcee2dda9bcc6ee4635235a9ac8d084489a435f448cc7b4a05';
+export const ResolverContractId = '0x41771453899a2170cfed89470dd414ce753e4d3b5b9c4f34e28a6e07e80425fe';

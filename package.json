@@ -1,0 +1,34 @@
+{
+  "name": "fuelname-ts",
+  "version": "1.0.5",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "generate-contracts": "pnpm fuels typegen -i ./contract_abis/*/out/release/*-abi.json -o ./src/utils/contracts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FuelName/fuelname-ts.git"
+  },
+  "keywords": [
+    "fuel",
+    "blockchain",
+    "fuelet",
+    "fuelname",
+    "sdk"
+  ],
+  "author": "fuelname@gmail.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FuelName/fuelname-ts/issues"
+  },
+  "homepage": "https://github.com/FuelName/fuelname-ts#readme",
+  "dependencies": {
+    "fuels": "0.90.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}
