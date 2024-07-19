@@ -25,10 +25,10 @@
     "url": "https://github.com/FuelName/fuelname-ts/issues"
   },
   "homepage": "https://github.com/FuelName/fuelname-ts#readme",
-  "dependencies": {
-    "fuels": "0.90.0"
-  },
   "devDependencies": {
     "typescript": "^5.4.5"
+  },
+  "peerDependencies": {
+    "fuels": "^0.91.0"
   }
 }
