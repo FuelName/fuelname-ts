@@ -1,136 +1,135 @@
 {
-  "encoding": "1",
-  "types": [
+  "programType": "contract",
+  "specVersion": "1",
+  "encodingVersion": "1",
+  "concreteTypes": [
     {
-      "typeId": 0,
       "type": "()",
-      "components": [],
-      "typeParameters": null
+      "concreteTypeId": "2e38e77b22c314a449e91fafed92a43826ac6aa403ae6a8acb6cf58239fbaf5d"
     },
     {
-      "typeId": 1,
-      "type": "b256",
-      "components": null,
-      "typeParameters": null
+      "type": "enum errors::ExpirationError",
+      "concreteTypeId": "ee7a715622ed02d79e886175ef1d67eb792ec779ac30a30e6c5cb6cd0b9078b1",
+      "metadataTypeId": 1
     },
     {
-      "typeId": 2,
-      "type": "enum ExpirationError",
-      "components": [
-        {
-          "name": "ExpiredDomain",
-          "type": 0,
-          "typeArguments": null
-        }
-      ],
-      "typeParameters": null
+      "type": "enum errors::OwnershipError",
+      "concreteTypeId": "aee2b753e18659eedbaa4e102230ed85324bb7b4c022931cd57aa8d3af6668a0",
+      "metadataTypeId": 2
     },
     {
-      "typeId": 3,
-      "type": "enum Identity",
-      "components": [
-        {
-          "name": "Address",
-          "type": 8,
-          "typeArguments": null
-        },
-        {
-          "name": "ContractId",
-          "type": 10,
-          "typeArguments": null
-        }
-      ],
-      "typeParameters": null
+      "type": "enum std::identity::Identity",
+      "concreteTypeId": "ab7cd04e05be58e3fc15d424c2c4a57f824a2a2d97d67252440a3925ebdc1335",
+      "metadataTypeId": 3
     },
     {
-      "typeId": 4,
-      "type": "enum Option",
-      "components": [
-        {
-          "name": "None",
-          "type": 0,
-          "typeArguments": null
-        },
-        {
-          "name": "Some",
-          "type": 7,
-          "typeArguments": null
-        }
-      ],
-      "typeParameters": [
-        7
+      "type": "enum std::option::Option<enum std::identity::Identity>",
+      "concreteTypeId": "253aea1197e8005518365bd24c8bc31f73a434fac0f7350e57696edfdd4850c2",
+      "metadataTypeId": 4,
+      "typeArguments": [
+        "ab7cd04e05be58e3fc15d424c2c4a57f824a2a2d97d67252440a3925ebdc1335"
       ]
     },
     {
-      "typeId": 5,
-      "type": "enum OwnershipError",
+      "type": "struct std::asset_id::AssetId",
+      "concreteTypeId": "c0710b6731b1dd59799cf6bef33eee3b3b04a2e40e80a0724090215bbf2ca974",
+      "metadataTypeId": 7
+    },
+    {
+      "type": "struct std::contract_id::ContractId",
+      "concreteTypeId": "29c10735d33b5159f0c71ee1dbd17b36a3e69e41f00fab0d42e1bd9f428d8a54",
+      "metadataTypeId": 8
+    }
+  ],
+  "metadataTypes": [
+    {
+      "type": "b256",
+      "metadataTypeId": 0
+    },
+    {
+      "type": "enum errors::ExpirationError",
+      "metadataTypeId": 1,
+      "components": [
+        {
+          "name": "ExpiredDomain",
+          "typeId": "2e38e77b22c314a449e91fafed92a43826ac6aa403ae6a8acb6cf58239fbaf5d"
+        }
+      ]
+    },
+    {
+      "type": "enum errors::OwnershipError",
+      "metadataTypeId": 2,
       "components": [
         {
           "name": "NotDomainOwner",
-          "type": 0,
-          "typeArguments": null
+          "typeId": "2e38e77b22c314a449e91fafed92a43826ac6aa403ae6a8acb6cf58239fbaf5d"
         }
-      ],
-      "typeParameters": null
+      ]
     },
     {
-      "typeId": 6,
-      "type": "enum ResolveError",
+      "type": "enum std::identity::Identity",
+      "metadataTypeId": 3,
       "components": [
         {
-          "name": "OwnerAndResolutionMismatch",
-          "type": 0,
-          "typeArguments": null
+          "name": "Address",
+          "typeId": 6
         },
         {
-          "name": "CannotSetPrimaryForUnknownAddress",
-          "type": 0,
-          "typeArguments": null
+          "name": "ContractId",
+          "typeId": 8
         }
-      ],
-      "typeParameters": null
+      ]
     },
     {
-      "typeId": 7,
+      "type": "enum std::option::Option",
+      "metadataTypeId": 4,
+      "components": [
+        {
+          "name": "None",
+          "typeId": "2e38e77b22c314a449e91fafed92a43826ac6aa403ae6a8acb6cf58239fbaf5d"
+        },
+        {
+          "name": "Some",
+          "typeId": 5
+        }
+      ],
+      "typeParameters": [
+        5
+      ]
+    },
+    {
       "type": "generic T",
-      "components": null,
-      "typeParameters": null
+      "metadataTypeId": 5
     },
     {
-      "typeId": 8,
-      "type": "struct Address",
+      "type": "struct std::address::Address",
+      "metadataTypeId": 6,
       "components": [
         {
           "name": "bits",
-          "type": 1,
-          "typeArguments": null
+          "typeId": 0
         }
-      ],
-      "typeParameters": null
+      ]
     },
     {
-      "typeId": 9,
-      "type": "struct AssetId",
+      "type": "struct std::asset_id::AssetId",
+      "metadataTypeId": 7,
       "components": [
         {
           "name": "bits",
-          "type": 1,
-          "typeArguments": null
+          "typeId": 0
         }
-      ],
-      "typeParameters": null
+      ]
     },
     {
-      "typeId": 10,
-      "type": "struct ContractId",
+      "type": "struct std::contract_id::ContractId",
+      "metadataTypeId": 8,
       "components": [
         {
           "name": "bits",
-          "type": 1,
-          "typeArguments": null
+          "typeId": 0
         }
-      ],
-      "typeParameters": null
+      ]
     }
   ],
   "functions": [
@@ -138,51 +137,11 @@
       "inputs": [
         {
           "name": "asset",
-          "type": 9,
-          "typeArguments": null
+          "concreteTypeId": "c0710b6731b1dd59799cf6bef33eee3b3b04a2e40e80a0724090215bbf2ca974"
         }
       ],
       "name": "resolve",
-      "output": {
-        "name": "",
-        "type": 4,
-        "typeArguments": [
-          {
-            "name": "",
-            "type": 3,
-            "typeArguments": null
-          }
-        ]
-      },
-      "attributes": [
-        {
-          "name": "storage",
-          "arguments": [
-            "read"
-          ]
-        }
-      ]
-    },
-    {
-      "inputs": [
-        {
-          "name": "identity",
-          "type": 3,
-          "typeArguments": null
-        }
-      ],
-      "name": "reverse_resolve",
-      "output": {
-        "name": "",
-        "type": 4,
-        "typeArguments": [
-          {
-            "name": "",
-            "type": 9,
-            "typeArguments": null
-          }
-        ]
-      },
+      "output": "253aea1197e8005518365bd24c8bc31f73a434fac0f7350e57696edfdd4850c2",
       "attributes": [
         {
           "name": "storage",
@@ -196,51 +155,15 @@
       "inputs": [
         {
           "name": "asset",
-          "type": 9,
-          "typeArguments": null
+          "concreteTypeId": "c0710b6731b1dd59799cf6bef33eee3b3b04a2e40e80a0724090215bbf2ca974"
         },
         {
           "name": "resolve_to",
-          "type": 4,
-          "typeArguments": [
-            {
-              "name": "",
-              "type": 3,
-              "typeArguments": null
-            }
-          ]
+          "concreteTypeId": "253aea1197e8005518365bd24c8bc31f73a434fac0f7350e57696edfdd4850c2"
         }
       ],
       "name": "set",
-      "output": {
-        "name": "",
-        "type": 0,
-        "typeArguments": null
-      },
-      "attributes": [
-        {
-          "name": "storage",
-          "arguments": [
-            "read",
-            "write"
-          ]
-        }
-      ]
-    },
-    {
-      "inputs": [
-        {
-          "name": "asset",
-          "type": 9,
-          "typeArguments": null
-        }
-      ],
-      "name": "set_primary",
-      "output": {
-        "name": "",
-        "type": 0,
-        "typeArguments": null
-      },
+      "output": "2e38e77b22c314a449e91fafed92a43826ac6aa403ae6a8acb6cf58239fbaf5d",
       "attributes": [
         {
           "name": "storage",
@@ -255,39 +178,19 @@
   "loggedTypes": [
     {
       "logId": "12601836278229916142",
-      "loggedType": {
-        "name": "",
-        "type": 5,
-        "typeArguments": []
-      }
+      "concreteTypeId": "aee2b753e18659eedbaa4e102230ed85324bb7b4c022931cd57aa8d3af6668a0"
     },
     {
       "logId": "17184171942952633047",
-      "loggedType": {
-        "name": "",
-        "type": 2,
-        "typeArguments": []
-      }
-    },
-    {
-      "logId": "376984952490149542",
-      "loggedType": {
-        "name": "",
-        "type": 6,
-        "typeArguments": []
-      }
+      "concreteTypeId": "ee7a715622ed02d79e886175ef1d67eb792ec779ac30a30e6c5cb6cd0b9078b1"
     }
   ],
   "messagesTypes": [],
   "configurables": [
     {
       "name": "REGISTRY_CONTRACT_ID",
-      "configurableType": {
-        "name": "",
-        "type": 10,
-        "typeArguments": []
-      },
-      "offset": 19856
+      "concreteTypeId": "29c10735d33b5159f0c71ee1dbd17b36a3e69e41f00fab0d42e1bd9f428d8a54",
+      "offset": 12248
     }
   ]
 }
