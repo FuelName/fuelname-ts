@@ -1,6 +1,6 @@
 {
   "name": "fuelname-ts",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -26,9 +26,9 @@
   },
   "homepage": "https://github.com/FuelName/fuelname-ts#readme",
   "devDependencies": {
-    "typescript": "^5.4.5"
+    "typescript": "^5.6.2"
   },
   "peerDependencies": {
-    "fuels": "^0.91.0"
+    "fuels": "^0.96.1"
   }
 }

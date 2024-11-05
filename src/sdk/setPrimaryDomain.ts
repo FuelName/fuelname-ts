@@ -1,5 +1,5 @@
 import type {Account, TxParams} from "fuels";
-import {addAssetAndCall, getAssetId, getResolverContract} from "../utils/fuel_utils";
+import {addAssetAndCall, getAssetId, getRegistryContract} from "../utils/fuel_utils";
 import {CallResult} from "../utils/types";
 
 const setPrimaryDomain = async (wallet: Account, domain: string, txParams: TxParams): Promise<CallResult<void>> => {
@@ -10,13 +10,16 @@ const setPrimaryDomain = async (wallet: Account, domain: string, txParams: TxPar
     }
     const assetId = assetIdResult.value!;
 
-    const resolverContractInstance = getResolverContract(wallet);
-    const invocationScope = resolverContractInstance
+    const registryContractInstance = getRegistryContract(wallet);
+    const invocationScope = registryContractInstance
       .functions
       .set_primary({bits: assetId})
       .txParams(txParams);
-    const result = await addAssetAndCall(invocationScope, assetId, wallet.address);
-    return CallResult.fromFunctionInvocationResult(result);
+    const scopeCall = await addAssetAndCall(invocationScope, assetId, wallet.address);
+
+    const functionResult = await scopeCall.waitForResult();
+
+    return CallResult.fromFunctionResult(functionResult);
   } catch (e) {
     return new CallResult<void>(false, [], undefined, undefined, undefined);
   }

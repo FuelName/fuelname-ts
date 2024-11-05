@@ -1,16 +1,16 @@
-import type {Address} from "fuels";
+import type {Address, AssetId} from "fuels";
 
-import {getResolverReadOnlyContract} from "../utils/fuel_utils";
+import {getRegistryReadOnlyContract} from "../utils/fuel_utils";
 import getDomainName from "./getDomainName";
 import {Option} from "../utils/contracts/common";
 import {ReadonlyCallResult} from "../utils/types";
 
 const getPrimaryDomain = async (address: Address): Promise<ReadonlyCallResult<Option<string>>> => {
   try {
-    const resolverContractInstance = await getResolverReadOnlyContract();
-    const result = await resolverContractInstance
+    const registryContractInstance = await getRegistryReadOnlyContract();
+    const result = await registryContractInstance
       .functions
-      .reverse_resolve({Address: {bits: address.toB256()}})
+      .resolve_to_primary_domain({Address: {bits: address.toB256()}})
       .get();
     const readonlyResult = ReadonlyCallResult.fromInvocationResult(result);
     if (!readonlyResult.isSuccess) {

@@ -16,8 +16,11 @@ const setAddress = async (wallet: Account, domain: string, address: Option<Addre
       .functions
       .set({bits: assetId}, address ? {Address: {bits: address.toB256()}} : undefined)
       .txParams(txParams);
-    const result = await addAssetAndCall(invocationScope, assetId, wallet.address);
-    return CallResult.fromFunctionInvocationResult(result);
+    const scopeCall = await addAssetAndCall(invocationScope, assetId, wallet.address);
+
+    const functionResult = await scopeCall.waitForResult();
+
+    return CallResult.fromFunctionResult(functionResult);
   } catch (e) {
     return new CallResult<void>(false, [], undefined, undefined, undefined);
   }
