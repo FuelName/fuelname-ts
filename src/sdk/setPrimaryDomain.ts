@@ -1,5 +1,5 @@
 import type {Account, TxParams} from "fuels";
-import {addAssetAndCall, getAssetId, getRegistryReadOnlyContract} from "../utils/fuel_utils";
+import {addAssetAndCall, getAssetId, getRegistryContract} from "../utils/fuel_utils";
 import {CallResult} from "../utils/types";
 
 const setPrimaryDomain = async (wallet: Account, domain: string, txParams: TxParams): Promise<CallResult<void>> => {
@@ -10,7 +10,7 @@ const setPrimaryDomain = async (wallet: Account, domain: string, txParams: TxPar
     }
     const assetId = assetIdResult.value!;
 
-    const registryContractInstance = await getRegistryReadOnlyContract();
+    const registryContractInstance = getRegistryContract(wallet);
     const invocationScope = registryContractInstance
       .functions
       .set_primary({bits: assetId})
