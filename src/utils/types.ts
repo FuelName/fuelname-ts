@@ -1,13 +1,18 @@
 import {
   BN,
   CallResult as FuelCallResult,
-  DryRunFailureStatusFragment,
-  FunctionInvocationResult,
-  InvocationCallResult,
+  FunctionResult,
+  DryRunFailureStatusFragment, DryRunResult,
   ReceiptType,
   TransactionResultReceipt,
   TransactionStatus
 } from "fuels";
+
+// Not sure if it's a correct name
+export type ScopeCall<T> = {
+  transactionId: string;
+  waitForResult: () => Promise<FunctionResult<T>>;
+}
 
 export class BaseCallResult<T> {
   isSuccess: boolean;
@@ -26,7 +31,7 @@ export class ReadonlyCallResult<T> extends BaseCallResult<T> {
     super(isSuccess, receipts, value);
   }
 
-  static fromInvocationResult<T>(invocation: InvocationCallResult<T>): ReadonlyCallResult<T> {
+  static fromInvocationResult<T>(invocation: DryRunResult<T>): ReadonlyCallResult<T> {
     const isSuccess = isSuccessStatus(invocation.callResult);
     return new ReadonlyCallResult(
       isSuccess,
@@ -58,14 +63,14 @@ export class CallResult<T> extends BaseCallResult<T> {
     this.gasUsed = gasUsed;
   }
 
-  static fromFunctionInvocationResult<T>(invocation: FunctionInvocationResult<T>): CallResult<T> {
-    const isSuccess = invocation.transactionResult.status === TransactionStatus.success;
+  static fromFunctionResult<T>(functionResult: FunctionResult<T>): CallResult<T> {
+    const isSuccess = functionResult.transactionResult.status === TransactionStatus.success;
     return new CallResult(
       isSuccess,
-      invocation.transactionResult.receipts,
-      isSuccess ? invocation.value : undefined,
-      invocation.transactionId,
-      invocation.gasUsed
+      functionResult.transactionResult.receipts,
+      isSuccess ? functionResult.value : undefined,
+      functionResult.transactionId,
+      functionResult.gasUsed
     );
   }
 

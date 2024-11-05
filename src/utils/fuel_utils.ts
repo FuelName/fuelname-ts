@@ -1,8 +1,8 @@
-import {Account, AddressLike, BytesLike, FunctionInvocationResult, FunctionInvocationScope, Provider} from "fuels";
+import {Account, AddressLike, AssetId, BytesLike, FunctionInvocationScope, Provider} from "fuels";
 
-import {RegistrarAbi__factory, RegistryAbi__factory, ResolverAbi__factory} from "./contracts";
+import {Registrar, Registry, Resolver} from "./contracts";
+import {ReadonlyCallResult, ScopeCall} from "./types";
 import {RegistrarContractId, RegistryContractId, ResolverContractId} from "./constants";
-import {ReadonlyCallResult} from "./types";
 
 const TestnetApiUrl = 'https://testnet.fuel.network/v1/graphql';
 
@@ -31,20 +31,20 @@ export const getResolverReadOnlyContract = async () => {
 };
 
 export const getRegistryContract = (accountOrProvider: Account | Provider) => {
-  return RegistryAbi__factory.connect(RegistryContractId, accountOrProvider);
+  return new Registry(RegistryContractId, accountOrProvider);
 };
 
 export const getRegistrarContract = (accountOrProvider: Account | Provider) => {
-  return RegistrarAbi__factory.connect(RegistrarContractId, accountOrProvider);
+  return new Registrar(RegistrarContractId, accountOrProvider);
 };
 
 export const getResolverContract = (accountOrProvider: Account | Provider) => {
-  return ResolverAbi__factory.connect(ResolverContractId, accountOrProvider);
+  return new Resolver(ResolverContractId, accountOrProvider);
 };
 
 export const addAssetAndCall = async <TArgs extends Array<any>, TReturn>(scope: FunctionInvocationScope<TArgs, TReturn>,
                                                                          assetId: BytesLike,
-                                                                         to: AddressLike): Promise<FunctionInvocationResult<TReturn>> => {
+                                                                         to: AddressLike): Promise<ScopeCall<TReturn>> => {
   const transactionRequest = await scope.getTransactionRequest();
   transactionRequest.addCoinOutput(to, 1, assetId);
   return await scope.call();

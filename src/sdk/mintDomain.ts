@@ -31,7 +31,7 @@ const mintDomain = async (account: Account, domain: string, years: number, txPar
     }
     const registryContractInstance = await getRegistryReadOnlyContract();
     const registrarContractInstance = getRegistrarContract(account);
-    const result = await registrarContractInstance
+    const scopeCall = await registrarContractInstance
       .functions
       .mint_domain(subdomain, years)
       .addContracts([registryContractInstance])
@@ -39,7 +39,9 @@ const mintDomain = async (account: Account, domain: string, years: number, txPar
       .txParams(txParams)
       .call();
 
-    return CallResult.fromFunctionInvocationResult(result)
+    const functionResult = await scopeCall.waitForResult();
+
+    return CallResult.fromFunctionResult(functionResult)
       .map(assetId => assetId.bits);
   } catch (e) {
     return new CallResult<string>(false, [], undefined, undefined, undefined);
