@@ -6,20 +6,6 @@ TypeScript SDK for interacting with the FuelName smart contracts.
 npm i fuelname-ts
 ```
 
-## Contracts
-
-In the `contract_abis` directory, you will find the generates ABIs for the contracts needed to interact with the
-blockchain.
-
-In order to generate the typescript wrappers around the contracts, call from the root of the project:
-
-```shell
-pnpm fuels typegen -i ./contract_abis/*/out/release/*-abi.json -o ./src/utils/contracts
-```
-
-For more, refer to the
-Fuel [documentation](https://docs.fuel.network/docs/fuels-ts/abi-typegen/generating-types-from-abi/).
-
 ### Preconditions
 
 Domain names as Strings and AssetIds are interchangeable. The AssetId is the unique identifier of the domain.
@@ -172,7 +158,7 @@ It will return the primary domain asset id for an address, if one exists.
 Registry::metadata(asset: AssetId, key: String) -> Option<Metadata>
 ```
 
-Where `key` is `"tokenURI"`. It should return an uri String pointing to a json file with the metadata for existing
+Where `key` is `"uri"`. It should return an uri String pointing to a json file with the metadata for existing
 domains.
 
 #### Get minted domain image

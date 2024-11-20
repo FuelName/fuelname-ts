@@ -1,12 +1,16 @@
 {
   "name": "fuelname-ts",
-  "version": "1.0.7",
-  "description": "",
+  "version": "1.0.8",
+  "description": "TypeScript SDK for Fuelname",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsc",
-    "generate-contracts": "pnpm fuels typegen -i ./contract_abis/*/out/release/*-abi.json -o ./src/utils/contracts"
+    "prepare": "pnpm run build",
+    "pub": "pnpm publish --access public"
   },
   "repository": {
     "type": "git",
@@ -25,10 +29,10 @@
     "url": "https://github.com/FuelName/fuelname-ts/issues"
   },
   "homepage": "https://github.com/FuelName/fuelname-ts#readme",
+  "peerDependencies": {
+    "fuels": "^0.97.0"
+  },
   "devDependencies": {
     "typescript": "^5.6.2"
-  },
-  "peerDependencies": {
-    "fuels": "^0.96.1"
   }
 }

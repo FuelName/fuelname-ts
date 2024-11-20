@@ -1,3 +1,30 @@
-export const RegistryContractId = '0x8e66c1787462dad4193ce687eab081adbcbced4b2cc4170f061285a4489855e7';
-export const RegistrarContractId = '0xbb04e3c7222d3bbcee2dda9bcc6ee4635235a9ac8d084489a435f448cc7b4a05';
-export const ResolverContractId = '0x41771453899a2170cfed89470dd414ce753e4d3b5b9c4f34e28a6e07e80425fe';
+export const TESTNET_REGISTRY_CONTRACT_ID =
+  "0x36804c827144e07895ef3c87050d79af7370594d5f65127d0e1079cdef576a49";
+export const TESTNET_REGISTRAR_CONTRACT_ID =
+  "0x287de6f1f18cb08abd9a20dd2a05a2bf9f0c8b2954b8368ee14934f976ba446f";
+
+// TODO: Update these values after deploying to mainnet
+export const MAINNET_REGISTRY_CONTRACT_ID =
+  "";
+export const MAINNET_REGISTRAR_CONTRACT_ID =
+  "";
+
+export function registryContractId(rpcUrl: string): string {
+  if (rpcUrl.includes("testnet")) {
+    return TESTNET_REGISTRY_CONTRACT_ID;
+  } else if (rpcUrl.includes("mainnet")) {
+    return MAINNET_REGISTRY_CONTRACT_ID;
+  } else {
+    throw new Error(`Unsupported network: ${rpcUrl}`);
+  }
+}
+
+export function registrarContractId(rpcUrl: string): string {
+  if (rpcUrl.includes("testnet")) {
+    return TESTNET_REGISTRAR_CONTRACT_ID;
+  } else if (rpcUrl.includes("mainnet")) {
+    return MAINNET_REGISTRAR_CONTRACT_ID;
+  } else {
+    throw new Error(`Unsupported network: ${rpcUrl}`);
+  }
+}

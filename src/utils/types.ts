@@ -1,12 +1,18 @@
 import {
   BN,
   CallResult as FuelCallResult,
+  DryRunFailureStatusFragment,
+  DryRunResult,
   FunctionResult,
-  DryRunFailureStatusFragment, DryRunResult,
   ReceiptType,
   TransactionResultReceipt,
   TransactionStatus
 } from "fuels";
+
+export type DomainPrice = {
+  assetId: string;
+  value: BN;
+};
 
 // Not sure if it's a correct name
 export type ScopeCall<T> = {
