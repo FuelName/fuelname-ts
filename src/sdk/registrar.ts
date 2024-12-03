@@ -1,6 +1,6 @@
-import {Account, BN, Provider, type TxParams} from "fuels";
+import {Account, BN, CoinQuantityLike, Provider, ScriptTransactionRequest, type TxParams} from "fuels";
 import {Registrar} from "./typegen";
-import {CallResult, DomainPrice, ReadonlyCallResult} from "../utils/types";
+import {DomainPrice, ReadonlyCallResult} from "../utils/types";
 import {registrarContractId} from "../utils/constants";
 import {removeFuelDomainSuffix} from "../utils/fuel_utils";
 
@@ -47,23 +47,40 @@ export class FuelnameRegistrar {
     }
   }
 
-  async mintDomain(domain: string, years: number, txParams: TxParams, price: DomainPrice): Promise<CallResult<string>> {
+  private async getResourcesToSpend(quantities: CoinQuantityLike[]) {
+    if (this.accountOrProvider instanceof Account) {
+      return await this.accountOrProvider.getResourcesToSpend(quantities);
+    }
+
+    throw new Error('Account is not available');
+  }
+
+  async mintDomain(domain: string, years: number, txParams: TxParams, price: DomainPrice): Promise<ScriptTransactionRequest> {
     try {
       const subdomain = removeFuelDomainSuffix(domain);
 
-      const scopeCall = await this.writeRegistrarContract!
+      const request = await this.writeRegistrarContract!
         .functions
         .mint_domain(subdomain, years)
-        .callParams({forward: {amount: price.value, assetId: price.assetId}})
         .txParams(txParams)
-        .call();
+        .getTransactionRequest();
 
-      const functionResult = await scopeCall.waitForResult();
+      // Not sure about what exactly is variable output here, for me it seemed to be 1
+      request.addVariableOutputs(1);
 
-      return CallResult.fromFunctionResult(functionResult)
-        .map(assetId => assetId.bits);
+      request.addResources(
+        await this.getResourcesToSpend([
+          { assetId: price.assetId, amount: price.value },
+          { assetId: this.provider().getBaseAssetId(), amount: txParams.gasLimit! }
+        ])
+      );
+
+      // Not sure whether funding should be done here or on the client – both ways didn't work for me anyway
+      const txCost = await this.account().getTransactionCost(request);
+      return await this.account().fund(request, txCost);
     } catch (e) {
-      return new CallResult<string>(false, [], undefined, undefined, undefined);
+      // Probably returning null or Error is better here
+      return new ScriptTransactionRequest();
     }
   }
 

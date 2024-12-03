@@ -147,6 +147,7 @@ export class FuelnameRegistry {
     }
   }
 
+  // Apparently this method has to be rewritten to return ScriptTransactionRequest just as mintDomain once it's resolved
   async setAddress(domain: string, address: Option<Address>, txParams: TxParams): Promise<CallResult<void>> {
     const account = this.account();
     try {
@@ -176,6 +177,7 @@ export class FuelnameRegistry {
     }
   }
 
+  // Same here
   async setPrimaryDomain(domain: string, txParams: TxParams): Promise<CallResult<void>> {
     const account = this.account();
     try {
